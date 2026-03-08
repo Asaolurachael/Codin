@@ -1,39 +1,86 @@
-import java.util.Scanner;
 
-public class Main {
-    public static Candidate getCandidateDetails() throws InvalidInternException {
-        Scanner scanner = new Scanner(System.in0);
+interface Vehicle {
+    
+    void changeGear(int a);
+    void speedUp(int a);
+    void applyBrakes(int a);
+}
 
-        System.out.println("Enter the candidate Details");
-
-        System.out.println("Name");
-        System name = scanner.next();
-
-        System.out.println("Gender");
-        System gender = Scanner.next();
-
-        System.out.println("Enter Percentage in 10th");
-        int percentage = scanner.nextInt();
-
-        if (percentage < 50) {
-            throw new InvalidInternException("Registration Failed. Percenatge cannot be less than 50%");
-        } else{
-            Candidate candidate = new Candidate();
-            Candidate.setName(name);
-            Candidate.setGender(gender);
-            Candidate.setPercentage(percentage);
-
-            return candidate;
-        }
+class Bicycle implements Vehicle{
+      
+    int speed;
+    int gear;
+      
+    @Override
+    public void changeGear(int newGear){
+          gear = newGear;
     }
-    public static void main(String[] args) {
-        System.out.println("Welcome to intrtifing Tool");
-
-        try{
-            Candidate candidate = getCandidateDetails();
-            System.out.println("Registration Successful");
-        } catch (Invalidinternal xception e) {
-            System.out.println(e.getMessage());
-        }
-    } 
+      
+    @Override
+    public void speedUp(int increment){
+          
+        speed = speed + increment;
+    }
+      
+    @Override
+    public void applyBrakes(int decrement){
+          
+        speed = speed - decrement;
+    }
+      
+    public void printStates() {
+         System.out.println("speed: " + speed
+              + " gear: " + gear);
+    }
+}
+  
+class Car implements Vehicle {
+      
+    int speed;
+    int gear;
+      
+    @Override
+    public void changeGear(int newGear){
+          
+        gear = newGear;
+    }
+      
+    @Override
+    public void speedUp(int increment){
+          
+        speed = speed + increment;
+    }
+      
+    @Override
+    public void applyBrakes(int decrement){
+          
+        speed = speed - decrement;
+    }
+      
+    public void printStates() {
+         System.out.println("speed: " + speed
+             + " gear: " + gear);
+    }
+      
+}
+class Main {
+      
+    public static void main (String[] args) {
+      
+        Bicycle bicycle = new Bicycle();
+        bicycle.changeGear(2);
+        bicycle.speedUp(3);
+        bicycle.applyBrakes(1);
+          
+        System.out.println("Bicycle present state :");
+        bicycle.printStates();
+          
+        Car car = new Car();
+        car.changeGear(1);
+        car.speedUp(4);
+        car.applyBrakes(3);
+          
+        System.out.println("Car present state :");
+        car.printStates();
+    }
 }
